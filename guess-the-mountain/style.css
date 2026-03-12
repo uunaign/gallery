@@ -110,5 +110,9 @@ h1 { font-size: 2.8rem; line-height: 0.9; margin: 10px 0; color: var(--dark); te
 /* Ajustes para móviles muy pequeños */
 @media (max-height: 600px) {
     h1 { font-size: 2rem; }
-    .image-viewport { margin: 10px 0; }
+    .image-viewport { 
+        margin: 10px 0; 
+        height: 50%;
+    }
+
 }
