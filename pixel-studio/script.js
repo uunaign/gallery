@@ -4,7 +4,6 @@ const video = document.createElement('video');
 const sidebar = document.getElementById('sidebar');
 const toggleBtn = document.getElementById('toggle-btn');
 
-// Controladores de UI
 const controls = {
     res: document.getElementById('res'),
     shape: document.getElementById('shape'),
@@ -17,10 +16,8 @@ const controls = {
     asciiCustom: document.getElementById('ascii-custom')
 };
 
-// Toggle Sidebar
 toggleBtn.onclick = () => sidebar.classList.toggle('hidden');
 
-// Mostrar/Ocultar secciones según selección
 controls.colorMode.onchange = () => {
     document.getElementById('duotone-controls').classList.toggle('hidden', controls.colorMode.value !== 'duotone');
 };
@@ -33,7 +30,6 @@ controls.asciiPresets.onchange = () => {
     controls.asciiCustom.classList.toggle('hidden', controls.asciiPresets.value !== 'custom');
 };
 
-// Cámara
 navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
     video.srcObject = stream;
     video.play();
@@ -58,13 +54,11 @@ function render() {
     const size = parseInt(controls.res.value);
     document.getElementById('v-res').innerText = size;
 
-    // Dibujar video original procesado por brillo
     ctx.filter = `brightness(${controls.bright.value}%)`;
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     
     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
     
-    // Limpiar canvas para dibujar píxeles
     ctx.filter = 'none';
     ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
