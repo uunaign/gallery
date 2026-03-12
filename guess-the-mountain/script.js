@@ -17,7 +17,6 @@ let score = 0;
 let startTime;
 let timerInterval;
 
-// Mezcla preguntas y opciones
 const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
 
 const startBtn = document.getElementById('start-btn');
@@ -27,7 +26,6 @@ startBtn.addEventListener('pointerdown', function(e) {
     document.getElementById('start-screen').classList.add('hidden');
     document.getElementById('countdown-screen').classList.remove('hidden');
     
-    // Preparar el pool de preguntas aleatorias
     gameQuestions = shuffle(mountainsData).map(q => ({
         ...q,
         options: shuffle(q.options)
@@ -67,18 +65,15 @@ function loadQuestion() {
     
     imgElement.style.opacity = '0';
     
-    // LÓGICA DE NOMBRE DE ARCHIVO:
-    // Convierte "Table Mountain" en "table-mountain.jpg"
-    // Convierte "Fuji" en "fuji.jpg"
+
     const fileName = q.name.toLowerCase().replace(/\s+/g, '-') + ".jpg";
     
-    imgElement.src = `assets/mountains/${fileName}`;
+    imgElement.src = `assets/mountains/${fileName}?v=${Date.now()}`;
     
     imgElement.onload = () => {
         imgElement.style.opacity = '1';
     };
 
-    // Si una imagen falla, avisamos por consola para saber cuál es
     imgElement.onerror = () => {
         console.error("Error cargando:", fileName);
     };
@@ -92,7 +87,6 @@ function loadQuestion() {
         btn.className = 'option-btn';
         btn.innerText = opt;
         
-        // Listener para móvil sin lag
         btn.addEventListener('pointerdown', (e) => {
             e.preventDefault();
             if (opt === q.name) score++;
