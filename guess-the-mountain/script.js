@@ -111,7 +111,7 @@ function finishGame() {
     document.getElementById('final-time').innerText = finalTime;
     
     document.getElementById('share-btn').onclick = () => {
-        const msg = `🏔️ He completado el Mountain Quiz en ${finalTime} con ${score}/10 aciertos.\n\n¿Puedes superarme? Juega aquí:\nhttps://gallery.unaign.xyz`;
+        const msg = `🏔️ He completado el Mountain Quiz en ${finalTime} con ${score}/10 aciertos.\n\n¿Puedes superarme? Juega aquí:\nhttps://gallery.unaign.xyz/guess-the-mountain/`;
         navigator.clipboard.writeText(msg).then(() => {
             alert("¡Resultado copiado!");
         });
