@@ -31,6 +31,13 @@ startBtn.addEventListener('pointerdown', function(e) {
         options: shuffle(q.options)
     }));
     
+    // Preload images
+    gameQuestions.forEach(q => {
+        const fileName = q.name.toLowerCase().replace(/\s+/g, '-') + ".jpg";
+        const img = new Image();
+        img.src = `assets/mountains/${fileName}`;
+    });
+    
     let count = 3;
     const cdLabel = document.getElementById('countdown-number');
     const interval = setInterval(() => {
