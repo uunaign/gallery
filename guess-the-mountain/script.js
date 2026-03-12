@@ -1,14 +1,14 @@
 const mountainsData = [
-    { name: "patagonia", options: ["Patagonia", "Alpes", "Andes", "Apalaches"] },
-    { name: "dolomitas", options: ["Dolomitas", "Urales", "Cáucaso", "Atlas"] },
-    { name: "matterhorn", options: ["Matterhorn", "Mont Blanc", "Jungfrau", "Elbrús"] },
-    { name: "fuji", options: ["Fuji", "Kailash", "Teide", "Kilimanjaro"] },
-    { name: "el-capitan", options: ["El Capitan", "Half Dome", "Zion", "Denali"] },
-    { name: "everest", options: ["Everest", "K2", "Lhotse", "Makalu"] },
-    { name: "kilimanjaro", options: ["Kilimanjaro", "Kenia", "Vinson", "Meru"] },
-    { name: "table-mountain", options: ["Table Mountain", "Lion's Head", "Uluru", "Peñón"] },
-    { name: "denali", options: ["Denali", "Logan", "Rainier", "Mauna Kea"] },
-    { name: "kirkjufell", options: ["Kirkjufell", "Hekla", "Katla", "Vestrahorn"] }
+    { name: "Patagonia", options: ["Patagonia", "Alpes", "Andes", "Apalaches"] },
+    { name: "Dolomitas", options: ["Dolomitas", "Urales", "Cáucaso", "Atlas"] },
+    { name: "Matterhorn", options: ["Matterhorn", "Mont Blanc", "Jungfrau", "Elbrús"] },
+    { name: "Fuji", options: ["Fuji", "Kailash", "Teide", "Kilimanjaro"] },
+    { name: "El Capitan", options: ["El Capitan", "Half Dome", "Zion", "Denali"] },
+    { name: "Everest", options: ["Everest", "K2", "Lhotse", "Makalu"] },
+    { name: "Kilimanjaro", options: ["Kilimanjaro", "Kenia", "Vinson", "Meru"] },
+    { name: "Table Mountain", options: ["Table Mountain", "Lion's Head", "Uluru", "Peñón"] },
+    { name: "Denali", options: ["Denali", "Logan", "Rainier", "Mauna Kea"] },
+    { name: "Kirkjufell", options: ["Kirkjufell", "Hekla", "Katla", "Vestrahorn"] }
 ];
 
 let gameQuestions = [];
@@ -17,17 +17,20 @@ let score = 0;
 let startTime;
 let timerInterval;
 
-const shuffle = (array) => array.sort(() => Math.random() - 0.5);
+// Mezcla preguntas y opciones
+const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
 
-// Usar 'pointerdown' para respuesta instantánea en móvil
-document.getElementById('start-btn').addEventListener('pointerdown', function(e) {
+const startBtn = document.getElementById('start-btn');
+
+startBtn.addEventListener('pointerdown', function(e) {
     e.preventDefault();
     document.getElementById('start-screen').classList.add('hidden');
     document.getElementById('countdown-screen').classList.remove('hidden');
     
-    gameQuestions = shuffle([...mountainsData]).map(q => ({
+    // Preparar el pool de preguntas aleatorias
+    gameQuestions = shuffle(mountainsData).map(q => ({
         ...q,
-        options: shuffle([...q.options])
+        options: shuffle(q.options)
     }));
     
     let count = 3;
@@ -62,14 +65,25 @@ function loadQuestion() {
     const q = gameQuestions[currentIdx];
     const imgElement = document.getElementById('mountain-img');
     
-    // Limpiar imagen anterior para evitar confusión visual
-    imgElement.src = ""; 
+    imgElement.style.opacity = '0';
     
+    // LÓGICA DE NOMBRE DE ARCHIVO:
+    // Convierte "Table Mountain" en "table-mountain.jpg"
+    // Convierte "Fuji" en "fuji.jpg"
     const fileName = q.name.toLowerCase().replace(/\s+/g, '-') + ".jpg";
+    
     imgElement.src = `assets/mountains/${fileName}`;
     
+    imgElement.onload = () => {
+        imgElement.style.opacity = '1';
+    };
+
+    // Si una imagen falla, avisamos por consola para saber cuál es
+    imgElement.onerror = () => {
+        console.error("Error cargando:", fileName);
+    };
+
     document.getElementById('current-q').innerText = currentIdx + 1;
-    
     const grid = document.getElementById('options-grid');
     grid.innerHTML = '';
     
@@ -77,20 +91,17 @@ function loadQuestion() {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.innerText = opt;
-        // Pointerdown elimina el lag de 300ms en móviles
+        
+        // Listener para móvil sin lag
         btn.addEventListener('pointerdown', (e) => {
             e.preventDefault();
-            handleAnswer(opt, q.name);
+            if (opt === q.name) score++;
+            currentIdx++;
+            if (currentIdx < gameQuestions.length) loadQuestion();
+            else finishGame();
         });
         grid.appendChild(btn);
     });
-}
-
-function handleAnswer(selected, correct) {
-    if (selected === correct) score++;
-    currentIdx++;
-    if (currentIdx < gameQuestions.length) loadQuestion();
-    else finishGame();
 }
 
 function finishGame() {
