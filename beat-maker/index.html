@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Drum Machine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="machine-case">
+        <header class="machine-header">
+            <div class="master-controls">
+                <button id="play-btn" class="btn-transport">PLAY</button>
+                <div class="control-group">
+                    <label>BPM</label>
+                    <input type="number" id="bpm-input" value="120" min="60" max="200">
+                </div>
+                <button id="clear-btn" class="btn-transport">CLEAR</button>
+            </div>
+            <a href="https://gallery.unaign.xyz" class="back-link"><img src="../assets/GALLERYLC.png" alt="Back" style="width: 25px;"></a>
+        </header>
+
+        <div id="sequencer-grid"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
