@@ -19,11 +19,12 @@ let timerInterval;
 
 const shuffle = (array) => array.sort(() => Math.random() - 0.5);
 
-document.getElementById('start-btn').onclick = () => {
+// Usar 'pointerdown' para respuesta instantánea en móvil
+document.getElementById('start-btn').addEventListener('pointerdown', function(e) {
+    e.preventDefault();
     document.getElementById('start-screen').classList.add('hidden');
     document.getElementById('countdown-screen').classList.remove('hidden');
     
-    // Barajar todo al empezar
     gameQuestions = shuffle([...mountainsData]).map(q => ({
         ...q,
         options: shuffle([...q.options])
@@ -40,7 +41,7 @@ document.getElementById('start-btn').onclick = () => {
             cdLabel.innerText = count;
         }
     }, 1000);
-};
+});
 
 function startGame() {
     document.getElementById('countdown-screen').classList.add('hidden');
@@ -59,9 +60,14 @@ function updateTimer() {
 
 function loadQuestion() {
     const q = gameQuestions[currentIdx];
-    // Formato: nombre-con-guion.jpg
+    const imgElement = document.getElementById('mountain-img');
+    
+    // Limpiar imagen anterior para evitar confusión visual
+    imgElement.src = ""; 
+    
     const fileName = q.name.toLowerCase().replace(/\s+/g, '-') + ".jpg";
-    document.getElementById('mountain-img').src = `assets/mountains/${fileName}`;
+    imgElement.src = `assets/mountains/${fileName}`;
+    
     document.getElementById('current-q').innerText = currentIdx + 1;
     
     const grid = document.getElementById('options-grid');
@@ -71,14 +77,20 @@ function loadQuestion() {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.innerText = opt;
-        btn.onclick = () => {
-            if (opt === q.name) score++;
-            currentIdx++;
-            if (currentIdx < gameQuestions.length) loadQuestion();
-            else finishGame();
-        };
+        // Pointerdown elimina el lag de 300ms en móviles
+        btn.addEventListener('pointerdown', (e) => {
+            e.preventDefault();
+            handleAnswer(opt, q.name);
+        });
         grid.appendChild(btn);
     });
+}
+
+function handleAnswer(selected, correct) {
+    if (selected === correct) score++;
+    currentIdx++;
+    if (currentIdx < gameQuestions.length) loadQuestion();
+    else finishGame();
 }
 
 function finishGame() {
@@ -92,9 +104,8 @@ function finishGame() {
     
     document.getElementById('share-btn').onclick = () => {
         const msg = `🏔️ He completado el Mountain Quiz en ${finalTime} con ${score}/10 aciertos.\n\n¿Puedes superarme? Juega aquí:\nhttps://gallery.unaign.xyz`;
-        
         navigator.clipboard.writeText(msg).then(() => {
-            alert("¡Resultado copiado al portapapeles!");
+            alert("¡Resultado copiado!");
         });
     };
 }
