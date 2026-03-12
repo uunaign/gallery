@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pixel Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside id="sidebar">
+        <div class="sidebar-header">
+            <h2>PIXEL STUDIO</h2>
+        </div>
+        
+        <div class="scroll-area">
+            <section>
+                <span class="label-group">Geometría</span>
+                <div class="control">
+                    <label>Resolución <span id="v-res">12</span></label>
+                    <input type="range" id="res" min="4" max="100" value="12">
+                </div>
+                <div class="control">
+                    <label>Forma</label>
+                    <select id="shape">
+                        <option value="square">Píxel Cuadrado</option>
+                        <option value="circle">Píxel Circular</option>
+                        <option value="ascii">ASCII</option>
+                    </select>
+                </div>
+            </section>
+
+            <section id="ascii-section" class="hidden">
+                <span class="label-group">ASCII Sets</span>
+                <div class="control">
+                    <select id="ascii-presets">
+                        <option value="@#S%?*+;:,. ">Estándar (Denso)</option>
+                        <option value="█▓▒░ ">Bloques Grises</option>
+                        <option value="01 ">Binario</option>
+                        <option value="custom">Personalizado...</option>
+                    </select>
+                    <input type="text" id="ascii-custom" class="hidden" placeholder="Ej: ABC...">
+                </div>
+            </section>
+
+            <section>
+                <span class="label-group">Color & Luz</span>
+                <div class="control">
+                    <label>Brillo</label>
+                    <input type="range" id="bright" min="0" max="200" value="100">
+                </div>
+                <div class="control">
+                    <label>Modo de Color</label>
+                    <select id="color-mode">
+                        <option value="full">Color Real</option>
+                        <option value="duotone">Duotono (Bitmap)</option>
+                    </select>
+                </div>
+                
+                <div id="duotone-controls" class="hidden">
+                    <div class="color-row">
+                        <input type="color" id="color-dark" value="#000000">
+                        <input type="color" id="color-light" value="#ffffff">
+                    </div>
+                    <div class="control">
+                        <label>Umbral (Threshold)</label>
+                        <input type="range" id="threshold" min="0" max="255" value="128">
+                    </div>
+                </div>
+            </section>
+
+            <button class="btn-main" onclick="takeSnapshot()">Exportar PNG</button>
+        </div>
+    </aside>
+
+    <button id="toggle-btn">☰</button>
+
+    <main id="viewport">
+        <canvas id="canvas"></canvas>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
