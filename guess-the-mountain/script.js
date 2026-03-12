@@ -1,14 +1,14 @@
 const mountainsData = [
-    { name: "Patagonia", options: ["Patagonia", "Alpes", "Andes", "Apalaches"] },
-    { name: "Dolomitas", options: ["Dolomitas", "Urales", "Cáucaso", "Atlas"] },
-    { name: "Matterhorn", options: ["Matterhorn", "Mont Blanc", "Jungfrau", "Elbrús"] },
-    { name: "Fuji", options: ["Fuji", "Kailash", "Teide", "Kilimanjaro"] },
-    { name: "El Capitan", options: ["El Capitan", "Half Dome", "Zion", "Denali"] },
-    { name: "Everest", options: ["Everest", "K2", "Lhotse", "Makalu"] },
-    { name: "Kilimanjaro", options: ["Kilimanjaro", "Kenia", "Vinson", "Meru"] },
-    { name: "Table Mountain", options: ["Table Mountain", "Lion's Head", "Uluru", "Peñón"] },
-    { name: "Denali", options: ["Denali", "Logan", "Rainier", "Mauna Kea"] },
-    { name: "Kirkjufell", options: ["Kirkjufell", "Hekla", "Katla", "Vestrahorn"] }
+    { name: "patagonia", options: ["Patagonia", "Alpes", "Andes", "Apalaches"] },
+    { name: "dolomitas", options: ["Dolomitas", "Urales", "Cáucaso", "Atlas"] },
+    { name: "matterhorn", options: ["Matterhorn", "Mont Blanc", "Jungfrau", "Elbrús"] },
+    { name: "fuji", options: ["Fuji", "Kailash", "Teide", "Kilimanjaro"] },
+    { name: "el-capitan", options: ["El Capitan", "Half Dome", "Zion", "Denali"] },
+    { name: "everest", options: ["Everest", "K2", "Lhotse", "Makalu"] },
+    { name: "kilimanjaro", options: ["Kilimanjaro", "Kenia", "Vinson", "Meru"] },
+    { name: "table-mountain", options: ["Table Mountain", "Lion's Head", "Uluru", "Peñón"] },
+    { name: "denali", options: ["Denali", "Logan", "Rainier", "Mauna Kea"] },
+    { name: "kirkjufell", options: ["Kirkjufell", "Hekla", "Katla", "Vestrahorn"] }
 ];
 
 let gameQuestions = [];
