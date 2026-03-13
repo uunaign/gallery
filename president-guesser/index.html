@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>President Guesser</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/6.9.0/gradio.js"></script>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-top">
+            <a href="https://gallery.unaign.xyz" class="logo">
+                <img src="../assets/GALLERYLC.png" alt="Logo">
+            </a>
+        </div>
+        <div class="sidebar-bottom">
+            <a href="https://github.com/uunaign/President-Guesser" target="_blank" class="github-link">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+        </div>
+    </nav>
+
+    <main class="viewport">
+        <div class="pixel-art art-left">
+            <img src="assets/president1.png" alt="">
+        </div>
+
+        <section class="main-content">
+            <header class="content-header">
+                <h1>President Guesser</h1>
+                <p>Piensa en un líder mundial y responde a las preguntas.</p>
+            </header>
+            
+            <div class="app-card">
+                <gradio-app src="https://unaign-president-guesser.hf.space"></gradio-app>
+            </div>
+        </section>
+
+        <div class="pixel-art art-right">
+            <img src="assets/president2.png" alt="">
+        </div>
+    </main>
+
+</body>
+</html>

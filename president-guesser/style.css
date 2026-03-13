@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+:root {
+    --bg: #ffffff;
+    --text: #111827;
+    --text-light: #6b7280;
+    --border: #e5e7eb;
+    --accent: #2563eb;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* Sidebar Estilo Herramienta */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 72px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    background: white;
+    z-index: 100;
+}
+
+.logo img {
+    width: 32px;
+    image-rendering: pixelated;
+}
+
+.github-link {
+    color: var(--text-light);
+    transition: color 0.2s;
+}
+
+.github-link:hover {
+    color: var(--text);
+}
+
+/* Layout Principal */
+.viewport {
+    margin-left: 72px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 40px;
+}
+
+.main-content {
+    width: 100%;
+    max-width: 600px;
+    z-index: 10;
+}
+
+.content-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 8px;
+}
+
+p {
+    color: var(--text-light);
+    font-size: 16px;
+}
+
+/* Card Estilo SaaS */
+.app-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 4px;
+}
+
+/* Pixel Art Sharp Rendering */
+.pixel-art {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.pixel-art img {
+    image-rendering: pixelated;
+    display: block;
+}
+
+.art-left {
+    left: 0;
+    bottom: 0;
+}
+
+.art-left img {
+    height: 80vh;
+}
+
+.art-right {
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.art-right img {
+    height: 45vh;
+}
+
+/* Responsive Móvil */
+@media (max-width: 900px) {
+    .sidebar {
+        width: 100%;
+        height: 60px;
+        flex-direction: row;
+        padding: 0 20px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+    .viewport {
+        margin-left: 0;
+        padding-top: 100px;
+    }
+    .pixel-art { display: none; }
+    h1 { font-size: 28px; }
+}
